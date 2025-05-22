@@ -3,12 +3,19 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { scrollToSection } from "@/utils/scrollUtils";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleNavClick = (sectionId: string, event: React.MouseEvent) => {
+    event.preventDefault();
+    scrollToSection(sectionId);
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -38,18 +45,34 @@ const Navbar = () => {
 
         {/* Desktop menu */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
+          <a 
+            href="#home" 
+            className="text-sm font-medium hover:text-primary transition-colors"
+            onClick={(e) => handleNavClick('home', e)}
+          >
             Home
-          </Link>
-          <Link to="/#dashboard" className="text-sm font-medium hover:text-primary transition-colors">
+          </a>
+          <a 
+            href="#dashboard" 
+            className="text-sm font-medium hover:text-primary transition-colors"
+            onClick={(e) => handleNavClick('dashboard', e)}
+          >
             Dashboard
-          </Link>
-          <Link to="/#features" className="text-sm font-medium hover:text-primary transition-colors">
+          </a>
+          <a 
+            href="#features" 
+            className="text-sm font-medium hover:text-primary transition-colors"
+            onClick={(e) => handleNavClick('features', e)}
+          >
             Features
-          </Link>
-          <Link to="/#about" className="text-sm font-medium hover:text-primary transition-colors">
+          </a>
+          <a 
+            href="#about" 
+            className="text-sm font-medium hover:text-primary transition-colors"
+            onClick={(e) => handleNavClick('about', e)}
+          >
             About
-          </Link>
+          </a>
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
@@ -88,34 +111,34 @@ const Navbar = () => {
         isMobileMenuOpen ? "block" : "hidden"
       )}>
         <div className="container px-4 py-4 flex flex-col space-y-4">
-          <Link 
-            to="/" 
+          <a 
+            href="#home" 
             className="text-sm font-medium hover:text-primary transition-colors py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick('home', e)}
           >
             Home
-          </Link>
-          <Link 
-            to="/#dashboard" 
+          </a>
+          <a 
+            href="#dashboard" 
             className="text-sm font-medium hover:text-primary transition-colors py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick('dashboard', e)}
           >
             Dashboard
-          </Link>
-          <Link 
-            to="/#features" 
+          </a>
+          <a 
+            href="#features" 
             className="text-sm font-medium hover:text-primary transition-colors py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick('features', e)}
           >
             Features
-          </Link>
-          <Link 
-            to="/#about" 
+          </a>
+          <a 
+            href="#about" 
             className="text-sm font-medium hover:text-primary transition-colors py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick('about', e)}
           >
             About
-          </Link>
+          </a>
           <div className="flex flex-col space-y-2 pt-2">
             <Button variant="outline">Log In</Button>
             <Button>Try Demo</Button>
